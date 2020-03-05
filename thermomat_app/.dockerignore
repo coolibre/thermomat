@@ -1,0 +1,10 @@
+.gitignore
+.dockerignore
+deploy.sh
+Dockerfile
+.vscode
+*.code-workspace
+**/node_modules
+**/dist
+**/README.md
+db.json
