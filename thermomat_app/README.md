@@ -123,3 +123,11 @@ volumes:
 networks:
   proxy-tier:
 ```
+# Create Users
+- from local network run
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"username":"xyz","password":"xyz"}' \
+  http://<local host ip>:5050/user/add
+```
