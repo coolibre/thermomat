@@ -125,82 +125,13 @@
           </v-window-item>
         </v-window>
       </v-col>
-      <v-dialog v-model="addTempDialog" persistent max-width="600px">
-        <v-card height="100%">
-          <v-card-title>
-            <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'">Add temperature</span>
-          </v-card-title>
-          <v-container>
-            <v-row>
-              <v-col align-self="center">
-                <v-menu
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :return-value.sync="selectedTime"
-                  :nudge-right="40"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-text-field
-                      v-model="selectedTime"
-                      color="deep-orange darken-4"
-                      label="Selected Time"
-                      prepend-icon="mdi-clock"
-                      readonly
-                      v-on="on"
-                    ></v-text-field>
-                  </template>
-                  <v-time-picker
-                    v-if="menu"
-                    v-model="selectedTime"
-                    full-width
-                    :allowed-minutes="allowedStep"
-                    color="deep-orange darken-4"
-                    header-color="deep-orange"
-                    format="24hr"
-                    @click:minute="$refs.menu.save(selectedTime)"
-                  ></v-time-picker>
-                </v-menu>
-              </v-col>
-              <v-col align-self="center">
-                <div class="hidden-xs-only display-4 text-center">{{selectedTemp.toFixed(1)}}°</div>
-                <div class="hidden-sm-and-up display-1 text-center">{{selectedTemp.toFixed(1)}}°</div>
-                <v-slider
-                  height="100%"
-                  track-color="deep-orange"
-                  color="deep-orange darken-4"
-                  step="0.5"
-                  max="30"
-                  min="5"
-                  v-model="selectedTemp"
-                ></v-slider>
-              </v-col>
-            </v-row>
-          </v-container>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              :small="$vuetify.breakpoint.xsOnly"
-              outlined
-              color="deep-orange darken-4"
-              text
-              @click="addTempDialog = false"
-            >Close</v-btn>
-            <v-btn
-              :small="$vuetify.breakpoint.xsOnly"
-              outlined
-              color="deep-orange darken-4"
-              text
-              @click="onAddTemp"
-            >Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
     </v-row>
+    <AddTemperatureDialog :shown="addTempDialog" @save="onAddTemp" @close="addTempDialog=false" />
   </div>
 </template>
 <script>
 import Temperatures from "./Temperatures";
+import AddTemperatureDialog from "./AddTemperatureDialog";
 import util from "./../util";
 export default {
   props: ["plan", "planActive", "update"],
@@ -217,12 +148,9 @@ export default {
     window: 0,
     editMode: false,
     addTempDialog: false,
-    selectedTime: "00:00",
-    selectedTemp: 20,
-    active: false,
-    menu: false
+    active: false
   }),
-  components: { Temperatures },
+  components: { Temperatures, AddTemperatureDialog },
   computed: {
     days: function() {
       return util.days;
@@ -285,13 +213,13 @@ export default {
       }
     },
     allowedStep: m => m % 5 === 0,
-    async onAddTemp() {
+    async onAddTemp(res) {
       await this.$api.addTemperature(
         this.plan.room,
         this.plan.name,
         this.days[this.window],
-        this.toDate(this.selectedTime),
-        this.selectedTemp
+        this.toDate(res.time),
+        res.temp
       );
       this.addTempDialog = false;
       await this.getTemps();
@@ -319,11 +247,3 @@ export default {
   }
 };
 </script>
-<style lang="sass">
-  @import '~vuetify/src/styles/styles.sass'
-  .small-text 
-      $time-picker-landscape-title-btn-height: 20px !default
-  @media #{map-get($display-breakpoints, 'xs-only')}
-    .small-text 
-      $time-picker-landscape-title-btn-height: 20px !default
-</style>
