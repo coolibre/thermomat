@@ -126,7 +126,7 @@
         </v-window>
       </v-col>
     </v-row>
-    <AddTemperatureDialog :shown="addTempDialog" @temperatureAdded="onAddTemp" />
+    <AddTemperatureDialog :shown="addTempDialog" @save="onAddTemp" @close="addTempDialog=false" />
   </div>
 </template>
 <script>
@@ -148,8 +148,6 @@ export default {
     window: 0,
     editMode: false,
     addTempDialog: false,
-    selectedTime: "00:00",
-    selectedTemp: 20,
     active: false
   }),
   components: { Temperatures, AddTemperatureDialog },
@@ -215,13 +213,13 @@ export default {
       }
     },
     allowedStep: m => m % 5 === 0,
-    async onAddTemp(temp) {
+    async onAddTemp(res) {
       await this.$api.addTemperature(
         this.plan.room,
         this.plan.name,
         this.days[this.window],
-        this.toDate(this.selectedTime),
-        temp
+        this.toDate(res.time),
+        res.temp
       );
       this.addTempDialog = false;
       await this.getTemps();
@@ -249,11 +247,3 @@ export default {
   }
 };
 </script>
-<style lang="sass">
-  @import '~vuetify/src/styles/styles.sass'
-  .small-text 
-      $time-picker-landscape-title-btn-height: 20px !default
-  @media #{map-get($display-breakpoints, 'xs-only')}
-    .small-text 
-      $time-picker-landscape-title-btn-height: 20px !default
-</style>
