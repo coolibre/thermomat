@@ -6,7 +6,7 @@
       </v-card-title>
       <v-container fluid>
         <v-col cols="12">
-          <v-row :align="center" :justify="center">
+          <v-row>
             <v-col>
               <TimePicker @input="timeChanged" :step="5"></TimePicker>
             </v-col>

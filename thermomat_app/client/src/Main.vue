@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="inspire" class="no-user-select">
     <v-app-bar app color="deep-orange" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="hidden-xs-only display-1">Thermomat</v-toolbar-title>
@@ -255,3 +255,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.no-user-select {
+  user-select: none;
+}
+</style>

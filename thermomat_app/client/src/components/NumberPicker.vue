@@ -6,7 +6,7 @@
       </v-btn>
     </div>
     <div class="hidden-xs-only display-4 text-center">{{format(value)}}</div>
-    <div class="hidden-sm-and-up display-3 text-center">{{format(value)}}</div>
+    <div class="hidden-sm-and-up display-1 text-center">{{format(value)}}</div>
     <div class="d-flex flex-row justify-center">
       <v-btn dark fab small color="deep-orange darken-4" @click="minus">
         <v-icon>mdi-minus</v-icon>
