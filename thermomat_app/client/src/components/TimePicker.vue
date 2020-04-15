@@ -7,7 +7,7 @@
         </v-btn>
       </div>
       <div class="hidden-xs-only display-4 text-center">{{formatHour}}</div>
-      <div class="hidden-sm-and-up display-3 text-center">{{formatHour}}</div>
+      <div class="hidden-sm-and-up display-1 text-center">{{formatHour}}</div>
       <div class="d-flex flex-row justify-center">
         <v-btn dark fab small color="deep-orange darken-4" @click="minusHour">
           <v-icon>mdi-minus</v-icon>
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-center flex-column">
       <div class="hidden-xs-only display-4 text-center">:</div>
-      <div class="hidden-sm-and-up display-3 text-center">:</div>
+      <div class="hidden-sm-and-up display-1 text-center">:</div>
     </div>
     <div class="d-flex flex-column">
       <div class="d-flex flex-row justify-center">
@@ -25,7 +25,7 @@
         </v-btn>
       </div>
       <div class="hidden-xs-only display-4 text-center">{{formatMinute}}</div>
-      <div class="hidden-sm-and-up display-3 text-center">{{formatMinute}}</div>
+      <div class="hidden-sm-and-up display-1 text-center">{{formatMinute}}</div>
       <div class="d-flex flex-row justify-center">
         <v-btn dark fab small color="deep-orange darken-4" @click="minusMinute">
           <v-icon>mdi-minus</v-icon>
