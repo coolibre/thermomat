@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-ipfilter": "^1.1.2",
     "express-sse": "^0.5.3",
-    "helmet": "^3.22.0",
+    "helmet": "^4.0.0",
     "jsoncrement": "^1.0.1",
     "lowdb": "^1.0.0",
     "node-json-db": "^1.0.3",
