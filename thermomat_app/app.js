@@ -108,8 +108,7 @@ app.post(
   }),
   async function (req, res) {
     try {
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(req.body.password, salt);
+      const hash = await hashPassword(req.body.password);
       addRequest("addUser", [req.body.name, hash], res);
     } catch (error) {
       console.log(error);
@@ -215,6 +214,23 @@ function getRequest(dbFunction, dbParams, res) {
   }
   res.send(result);
 }
+
+async function hashPassword(password) {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
+}
+
+async function initAdminUSer() {
+  try {
+    const hash = await hashPassword(process.env.ADMIN_PASSWORD || "admin");
+    db.addUser(process.env.ADMIN_USER || "admin", hash);
+  } catch (error) {
+    console.error("Error creating admin user", error);
+  }
+}
+// add admin user from env setting
+initAdminUSer();
 
 app.listen(conf.PORT, "0.0.0.0");
 console.log(`Server running on port ${conf.PORT}`);
