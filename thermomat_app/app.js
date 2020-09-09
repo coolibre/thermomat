@@ -7,6 +7,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+const rand = require("random-key");
 const app = express();
 const db = require("./db");
 const ipfilter = require("express-ipfilter").IpFilter;
@@ -27,8 +28,8 @@ app.use(
 );
 app.use(
   cookieSession({
-    name: "mysession",
-    keys: ["vueauthrandomkey"],
+    name: "thermomatsession",
+    keys: [rand.generate(64)],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })
 );
