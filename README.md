@@ -1,4 +1,4 @@
-# thermomat
+# Thermomat
 Low cost smart home IOT heating with adapted eq3n and esp8266-07.
 Server, Webapp and ESP8266 code for autonomous thermostat controling over the internet.
 

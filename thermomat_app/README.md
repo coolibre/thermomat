@@ -18,6 +18,10 @@ cd client
 npx vue-cli-service build --watch
 ```
 
+## Testing
+
+Use thermomat.postman_collection to play around. Or connect a real device and configure your development pc as endpoint in the WIFI manager.
+
 # Deployment
 
 ## Build
