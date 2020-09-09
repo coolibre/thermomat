@@ -37,12 +37,12 @@
 <script>
 export default {
   props: {
-    step: { default: 1 }
+    step: { default: 1 },
   },
   data: () => ({
     value: "00:00",
     minute: 0,
-    hour: 0
+    hour: 0,
   }),
   methods: {
     plusMinute() {
@@ -74,7 +74,7 @@ export default {
       this.value = `${this.hour
         .toString()
         .padStart("2", 0)}:${this.minute.toString().padStart("2", 0)}`;
-    }
+    },
   },
   computed: {
     formatHour() {
@@ -82,18 +82,18 @@ export default {
     },
     formatMinute() {
       return this.minute.toString().padStart(2, "0");
-    }
+    },
   },
   watch: {
-    minute: function() {
+    minute: function () {
       this.setValue();
     },
-    hour: function() {
+    hour: function () {
       this.setValue();
     },
-    value: function(value) {
+    value: function (value) {
       this.$emit("input", value);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -155,7 +155,7 @@ import sse from "./sse";
 import util from "./util";
 export default {
   props: {
-    source: String
+    source: String,
   },
   data: () => ({
     drawer: null,
@@ -172,10 +172,10 @@ export default {
     copySelectedPlan: "",
     copyPlans: [],
     days: util.days,
-    updateDaySelector: false
+    updateDaySelector: false,
   }),
   components: {
-    DaySelector
+    DaySelector,
   },
   methods: {
     async fetchRooms() {
@@ -247,12 +247,12 @@ export default {
     },
     async addTemp(room, plan, day, time, temp) {
       await this.$api.addTemperature(room, plan, day, time, temp);
-    }
+    },
   },
   mounted() {
     sse.listen("addedRoom", this.onAddedRoom.bind(this));
     this.init();
-  }
+  },
 };
 </script>
 <style scoped>

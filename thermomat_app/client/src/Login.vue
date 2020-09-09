@@ -28,7 +28,7 @@ export default {
   data: () => ({
     name: "",
     password: "",
-    loginMessage: ""
+    loginMessage: "",
   }),
   methods: {
     async login() {
@@ -38,8 +38,8 @@ export default {
       } else if (result.error) {
         this.loginMessage = result.error.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

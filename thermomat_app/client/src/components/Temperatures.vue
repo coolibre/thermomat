@@ -28,7 +28,7 @@ export default {
   methods: {
     onDeleteTemp(evt) {
       this.$emit("deleteTemp", evt);
-    }
-  }
+    },
+  },
 };
 </script>

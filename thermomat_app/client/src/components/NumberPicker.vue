@@ -21,12 +21,12 @@ export default {
     max: { default: 100 },
     step: { default: 1 },
     format: { default: () => this.value },
-    init: Number
+    init: Number,
   },
   data: () => ({
-    value: 0
+    value: 0,
   }),
-  created: function() {
+  created: function () {
     this.value = this.min;
   },
   methods: {
@@ -37,15 +37,15 @@ export default {
     minus() {
       const newVal = this.value - this.step;
       if (newVal >= this.min) this.value = newVal;
-    }
+    },
   },
   watch: {
-    value: function(value) {
+    value: function (value) {
       this.$emit("input", value);
     },
-    init: function(value) {
+    init: function (value) {
       this.value = value;
-    }
-  }
+    },
+  },
 };
 </script>

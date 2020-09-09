@@ -50,14 +50,14 @@ export default {
   props: ["shown"],
   data: () => ({
     selectedTime: "00:00",
-    selectedTemp: 20
+    selectedTemp: 20,
   }),
   components: { NumberPicker, TimePicker },
   methods: {
     save() {
       this.$emit("save", {
         temp: this.selectedTemp,
-        time: this.selectedTime
+        time: this.selectedTime,
       });
     },
     formatCelsius(value) {
@@ -71,7 +71,7 @@ export default {
     },
     close() {
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>

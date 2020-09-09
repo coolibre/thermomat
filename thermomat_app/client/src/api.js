@@ -3,7 +3,7 @@ let api;
 async function request(method, url, params) {
   let config = {
     method,
-    url
+    url,
   };
   if (method === "get") {
     config.params = params;
@@ -24,20 +24,23 @@ export default class API {
   constructor(config, router) {
     const baseURL = `${config.proto}://${config.host}:${config.port}`;
     api = axios.create({
-      baseURL
+      baseURL,
     });
-    api.interceptors.response.use(response => response, (error) => {
-      if (error.response.status === 401) {
-        router.push('/login');
+    api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401) {
+          router.push("/login");
+        }
+        return Promise.reject(error.response);
       }
-      return Promise.reject(error.response);
-    });
+    );
   }
 
   login(name, password) {
     return request("post", "/login", {
       name,
-      password
+      password,
     });
   }
 
@@ -51,42 +54,42 @@ export default class API {
 
   getAllPlans(room) {
     return request("get", "/plan/getall", {
-      room
+      room,
     });
   }
 
   addPlan(room, name) {
     return request("post", "/plan/add", {
       room,
-      name
+      name,
     });
   }
 
   deletePlan(room, name) {
     return request("post", "/plan/delete", {
       room,
-      name
+      name,
     });
   }
 
   activatePlan(room, name) {
     return request("post", "/plan/activate", {
       room,
-      name
+      name,
     });
   }
 
   deactivatePlan(room, name) {
     return request("post", "/plan/deactivate", {
       room,
-      name
+      name,
     });
   }
 
   getAllTemperatures(room, plan) {
     return request("get", "/temperature/getall", {
       room,
-      plan
+      plan,
     });
   }
 
@@ -96,7 +99,7 @@ export default class API {
       plan,
       day,
       time,
-      temp
+      temp,
     });
   }
 
@@ -105,7 +108,7 @@ export default class API {
       room,
       plan,
       day,
-      time
+      time,
     });
   }
 }

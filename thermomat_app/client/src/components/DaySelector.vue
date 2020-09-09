@@ -143,35 +143,35 @@ export default {
       Thursday: [],
       Friday: [],
       Saturday: [],
-      Sunday: []
+      Sunday: [],
     },
     window: 0,
     editMode: false,
     addTempDialog: false,
-    active: false
+    active: false,
   }),
   components: { Temperatures, AddTemperatureDialog },
   computed: {
-    days: function() {
+    days: function () {
       return util.days;
     },
-    today: function() {
+    today: function () {
       const dayName = new Date().toLocaleDateString("en-US", {
-        weekday: "long"
+        weekday: "long",
       });
       return this.days.indexOf(dayName);
-    }
+    },
   },
   watch: {
-    active: function(newVal, oldVal) {
+    active: function (newVal, oldVal) {
       this.activatePlan(oldVal);
     },
-    planActive: function(newVal) {
+    planActive: function (newVal) {
       this.active = newVal;
     },
-    update: function(newVal) {
+    update: function (newVal) {
       if (newVal) this.init();
-    }
+    },
   },
   methods: {
     async init() {
@@ -212,7 +212,7 @@ export default {
         this.temperatures[temp.day].push(temp);
       }
     },
-    allowedStep: m => m % 5 === 0,
+    allowedStep: (m) => m % 5 === 0,
     async onAddTemp(res) {
       await this.$api.addTemperature(
         this.plan.room,
@@ -240,10 +240,10 @@ export default {
       date.setHours(split[0]);
       date.setMinutes(split[1]);
       return date;
-    }
+    },
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>
