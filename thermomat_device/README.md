@@ -24,6 +24,10 @@
 | +                    | VCC    |
 | GND                  | GND    |
 
+# Scheme
+
+![thermomtat](https://user-images.githubusercontent.com/58222491/92621430-1949cc00-f2c4-11ea-8f5f-025a6b75946f.jpg)
+
 # Arduino IDE Settings
 
 1. Datei -> Voreinstellungen -> Zusätzliche Boardverwalter-URLs : http://arduino.esp8266.com/stable/package_esp8266com_index.json einfügen
