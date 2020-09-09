@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "6fddb0ad-3cd4-5191-f527-310d91b962b8",
+		"name": "thermomat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addRoom",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "room1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5050/room/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"room",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/room/get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5050/room/get?name=room1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"room",
+						"get"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "room1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/rooms/getall",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5050/room/getall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"room",
+						"getall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/plan/getall",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5050/plan/getall?room=room1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"plan",
+						"getall"
+					],
+					"query": [
+						{
+							"key": "room",
+							"value": "room1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/plan/add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "room",
+							"value": "room1",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "superplan",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5050/plan/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"plan",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/temperature/get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5050/temperature/get?room=wohnzimmer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"temperature",
+						"get"
+					],
+					"query": [
+						{
+							"key": "room",
+							"value": "wohnzimmer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "fred",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "fred",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5050/user/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"user",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
