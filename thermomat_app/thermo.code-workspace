@@ -1,7 +1,13 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	]
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": ".."
+    },
+    {
+      "path": "../thermomat_device"
+    }
+  ]
 }
