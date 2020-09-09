@@ -112,7 +112,7 @@ void setup() {
   //fetches ssid and pass and tries to connect
   //if it does not connect it starts an access point with the specified name
   //here  "AutoConnectAP"
-  if(!wifiManager.autoConnect("Thermostat AP", "freibier")) {
+  if(!wifiManager.autoConnect("Thermomat AP", "thermomat")) {
     Serial.println("failed to connect and hit timeout");
     //reset and try again, or maybe put it to deep sleep
     ESP.reset();
