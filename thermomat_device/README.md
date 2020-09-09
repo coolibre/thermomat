@@ -28,6 +28,15 @@
 
 ![thermomtat](https://user-images.githubusercontent.com/58222491/92621430-1949cc00-f2c4-11ea-8f5f-025a6b75946f.jpg)
 
+# Pictures
+
+![IMG_6568](https://user-images.githubusercontent.com/58222491/92623073-17810800-f2c6-11ea-9966-dea7dbdfa5fb.JPG)
+
+![IMG_6567](https://user-images.githubusercontent.com/58222491/92623084-1a7bf880-f2c6-11ea-825d-ca24aa10928e.JPG)
+
+![IMG_6564](https://user-images.githubusercontent.com/58222491/92623090-1c45bc00-f2c6-11ea-88f1-e7fa66be0976.JPG)
+
+
 # Arduino IDE Settings
 
 1. Datei -> Voreinstellungen -> Zusätzliche Boardverwalter-URLs : http://arduino.esp8266.com/stable/package_esp8266com_index.json einfügen
