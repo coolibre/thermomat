@@ -4,35 +4,37 @@
       <v-card-title>
         <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'">Usermanagement</span>
       </v-card-title>
-      <div>
-        <v-btn
-          v-if="user.isAdmin"
-          class="add-button"
-          relative
-          dark
-          small
-          fab
-          color="deep-orange darken-4"
-          @click="userAddDialogShown=true"
-        >
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-        <v-data-table :headers="headers" :items="users" sort-by="name" class="elevation-1">
-          <template v-slot:item.isAdmin="{ item }">
-            <v-simple-checkbox v-model="item.isAdmin" disabled></v-simple-checkbox>
-          </template>
-          <template v-slot:item.edit="{ item }">
-            <v-btn dark small fab color="deep-orange darken-4" @click="userEditClick(item)">
-              <v-icon>mdi-dots-horizontal</v-icon>
-            </v-btn>
-          </template>
-          <template v-if="user.isAdmin" v-slot:item.delete="{ item }">
-            <v-btn dark small fab color="deep-orange darken-4" @click="userDeleteClick(item)">
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
-          </template>
-        </v-data-table>
-      </div>
+      <v-container>
+        <div>
+          <v-btn
+            v-if="user.isAdmin"
+            class="add-button"
+            relative
+            dark
+            small
+            fab
+            color="deep-orange darken-4"
+            @click="userAddDialogShown=true"
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          <v-data-table :headers="headers" :items="users" sort-by="name">
+            <template v-slot:item.isAdmin="{ item }">
+              <v-simple-checkbox v-model="item.isAdmin" disabled></v-simple-checkbox>
+            </template>
+            <template v-slot:item.edit="{ item }">
+              <v-btn dark small fab color="deep-orange darken-4" @click="userEditClick(item)">
+                <v-icon>mdi-dots-horizontal</v-icon>
+              </v-btn>
+            </template>
+            <template v-if="user.isAdmin" v-slot:item.delete="{ item }">
+              <v-btn dark small fab color="deep-orange darken-4" @click="userDeleteClick(item)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </template>
+          </v-data-table>
+        </div>
+      </v-container>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
