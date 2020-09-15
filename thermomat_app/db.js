@@ -11,7 +11,7 @@ db.defaults({
 }).write();
 
 class DB {
-  addUser(name, password) {
+  addUser(name, password, isAdmin) {
     const user = db
       .get("users")
       .filter({
@@ -26,6 +26,7 @@ class DB {
         })
         .assign({
           password,
+          isAdmin,
         })
         .write();
     }
@@ -34,19 +35,36 @@ class DB {
       .push({
         name,
         password,
+        isAdmin,
       })
       .write();
   }
 
-  getUser(name) {
-    const user = db
+  getUser(name, hidePassword) {
+    let user = db
       .get("users")
       .filter({
         name,
       })
+      .cloneDeep()
       .value();
+    user = user[0] || {};
+    if (hidePassword) {
+      delete user.password;
+    }
     if (!user) throw Error("User not found");
-    return user[0];
+    return user;
+  }
+
+  getUsers() {
+    const users = db
+      .get("users")
+      .value()
+      .map((user) => ({
+        name: user.name,
+        isAdmin: user.isAdmin,
+      }));
+    return users || [];
   }
 
   deleteUser(name) {

@@ -7,7 +7,22 @@
         :class="$vuetify.breakpoint.smAndUp ? 'display-1 pl-10' : 'body-1'"
       >{{rooms[activeRoomIndex] ? rooms[activeRoomIndex].name : ''}}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="white" :small="$vuetify.breakpoint.xsOnly" outlined @click="logout">logout</v-btn>
+      <v-menu bottom offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on" icon>
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in accountMenuItems"
+            :key="index"
+            @click="accountMenuClick(item.title)"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-navigation-drawer clipped v-model="drawer" app>
       <v-list>
@@ -145,12 +160,14 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <UserManagementDialog :shown="showUserManagementDialog" @close="showUserManagementDialog=false"></UserManagementDialog>
   </v-app>
 </template>
 
 <script>
 // eslint no-console off
 import DaySelector from "./components/DaySelector";
+import UserManagementDialog from "./components/UserManagementDialog";
 import sse from "./sse";
 import util from "./util";
 export default {
@@ -167,15 +184,19 @@ export default {
     addPlanDialog: false,
     planName: "",
     showCopyDialog: false,
+    showUserManagementDialog: false,
     copySelectedRoom: "",
     copySelectedDay: "",
     copySelectedPlan: "",
     copyPlans: [],
     days: util.days,
     updateDaySelector: false,
+    accountMenuItems: [{ title: "Users" }, { title: "Logout" }],
+    user: {},
   }),
   components: {
     DaySelector,
+    UserManagementDialog,
   },
   methods: {
     async fetchRooms() {
@@ -247,6 +268,18 @@ export default {
     },
     async addTemp(room, plan, day, time, temp) {
       await this.$api.addTemperature(room, plan, day, time, temp);
+    },
+    accountMenuClick(title) {
+      switch (title) {
+        case "Logout":
+          this.logout();
+          break;
+        case "Users":
+          this.showUserManagementDialog = true;
+          break;
+        default:
+          break;
+      }
     },
   },
   mounted() {

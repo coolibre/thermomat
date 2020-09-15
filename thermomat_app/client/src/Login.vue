@@ -10,6 +10,7 @@
               v-model="password"
               label="Password"
               :type="'password'"
+              @keyup.enter="login"
             ></v-text-field>
             <v-row justify="center">
               <div class="login-message">{{loginMessage}}</div>

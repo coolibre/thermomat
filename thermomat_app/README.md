@@ -92,11 +92,4 @@ Defaultwise a admin user is created with username **admin** and password **admin
 
 ## Create other Users
 
-- from local network run
-
-```bash
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"username":"xyz","password":"xyz"}' \
-  http://<local host ip>:5050/user/add
-```
+Go to Users menu by clicking the menu on the right side ofthe top bar. As admin you can add, edit and delete other users. Normal users can only change their password.

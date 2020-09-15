@@ -111,4 +111,24 @@ export default class API {
       time,
     });
   }
+
+  getUser() {
+    return request("get", "/user/get");
+  }
+
+  getUsers() {
+    return request("get", "/user/getall");
+  }
+
+  addUser(name, password, isAdmin) {
+    return request("post", "/user/add", { name, password, isAdmin });
+  }
+
+  deleteUser(name) {
+    return request("post", "/user/delete", { name });
+  }
+
+  updatePassword(password) {
+    return request("post", "/user/password/update", { password });
+  }
 }

@@ -101,32 +101,39 @@ app.get("/logout", authMiddleware, function (req, res) {
   return res.send();
 });
 app.get("/stream", authMiddleware, sse.init);
-app.post(
-  "/user/add",
-  ipfilter(IPS, {
-    mode: "allow",
-    detectIp: customDetection,
-  }),
-  async function (req, res) {
-    try {
-      const hash = await hashPassword(req.body.password);
-      addRequest("addUser", [req.body.name, hash], res);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("Error on saving user");
-    }
+app.post("/user/add", [authMiddleware, authorizeAdmin], async function (
+  req,
+  res
+) {
+  try {
+    const hash = await hashPassword(req.body.password);
+    addRequest("addUser", [req.body.name, hash, req.body.isAdmin], res);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error on saving user");
   }
-);
-app.post(
-  "/user/delete",
-  ipfilter(IPS, {
-    mode: "allow",
-    detectIp: customDetection,
-  }),
-  function (req, res) {
-    addRequest("deleteUser", [req.body.name], res);
+});
+app.get("/user/get", authMiddleware, function (req, res) {
+  getRequest("getUser", [req.user.name, true], res);
+});
+app.get("/user/getall", [authMiddleware, authorizeAdmin], function (req, res) {
+  getRequest("getUsers", [], res);
+});
+app.post("/user/password/update", [authMiddleware], async function (req, res) {
+  try {
+    const hash = await hashPassword(req.body.password);
+    addRequest("addUser", [req.user.name, hash, req.user.isAdmin], res);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error on changing password");
   }
-);
+});
+app.post("/user/delete", [authMiddleware, authorizeAdmin, isNotMe], function (
+  req,
+  res
+) {
+  addRequest("deleteUser", [req.body.name], res);
+});
 app.get(
   "/temperature/get",
   ipfilter(IPS, {
@@ -222,16 +229,32 @@ async function hashPassword(password) {
   return hash;
 }
 
-async function initAdminUSer() {
+function authorizeAdmin(req, res, next) {
+  if (!req.user.isAdmin) {
+    res.status(405).send("You are not authorized");
+  } else {
+    return next();
+  }
+}
+
+function isNotMe(req, res, next) {
+  if (req.body.name === req.user.name) {
+    res.status(405).send("You are not authorized");
+  } else {
+    return next();
+  }
+}
+
+async function initAdminUser() {
   try {
     const hash = await hashPassword(process.env.ADMIN_PASSWORD || "admin");
-    db.addUser(process.env.ADMIN_USER || "admin", hash);
+    db.addUser(process.env.ADMIN_USER || "admin", hash, true);
   } catch (error) {
     console.error("Error creating admin user", error);
   }
 }
 // add admin user from env setting
-initAdminUSer();
+initAdminUser();
 
 app.listen(conf.PORT, "0.0.0.0");
 console.log(`Server running on port ${conf.PORT}`);
