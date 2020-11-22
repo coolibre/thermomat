@@ -26,6 +26,8 @@ Use thermomat.postman_collection to play around. Or connect a real device and co
 
 ## Build
 
+Place your domain in .env.production
+
 ```bash
 docker build . -t thermomat
 ```
