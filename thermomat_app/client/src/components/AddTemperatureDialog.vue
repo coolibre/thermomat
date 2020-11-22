@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="shown" persistent max-width="500px">
+  <v-dialog v-model="shown" persistent max-width="550px">
     <v-card height="100%">
       <v-card-title>
         <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'">Add temperature</span>
