@@ -9,7 +9,7 @@
     "build-watch": "vue-cli-service build-watch --mode development"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "core-js": "^3.7.0",
     "vue": "^2.6.12",
     "vue-cli-plugin-build-watch": "^1.0.0",
