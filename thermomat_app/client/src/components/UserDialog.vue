@@ -3,14 +3,19 @@
     <v-form ref="form" v-model="valid">
       <v-card height="100%">
         <v-card-title>
-          <span
-            :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
-          >{{edit ? "Edit": "Add"}} User</span>
+          <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
+            >{{ edit ? "Edit" : "Add" }} User</span
+          >
         </v-card-title>
         <v-container>
           <v-row>
             <v-col cols="6">
-              <v-text-field v-if="!edit" color="deep-orange darken-4" v-model="name" label="Name"></v-text-field>
+              <v-text-field
+                v-if="!edit"
+                color="deep-orange darken-4"
+                v-model="name"
+                label="Name"
+              ></v-text-field>
               <v-text-field
                 v-if="edit"
                 disabled
@@ -64,7 +69,8 @@
             color="deep-orange darken-4"
             text
             @click="$emit('close')"
-          >Close</v-btn>
+            >Close</v-btn
+          >
           <v-btn
             :disabled="!valid"
             :small="$vuetify.breakpoint.xsOnly"
@@ -72,7 +78,8 @@
             color="deep-orange darken-4"
             text
             @click="save"
-          >Save</v-btn>
+            >Save</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-form>

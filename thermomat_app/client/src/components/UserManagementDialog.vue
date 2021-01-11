@@ -2,7 +2,9 @@
   <v-dialog v-model="shown" persistent max-width="500px">
     <v-card height="100%">
       <v-card-title>
-        <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'">Usermanagement</span>
+        <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
+          >Usermanagement</span
+        >
       </v-card-title>
       <v-container>
         <div>
@@ -14,21 +16,36 @@
             small
             fab
             color="deep-orange darken-4"
-            @click="userAddDialogShown=true"
+            @click="userAddDialogShown = true"
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
           <v-data-table :headers="headers" :items="users" sort-by="name">
             <template v-slot:item.isAdmin="{ item }">
-              <v-simple-checkbox v-model="item.isAdmin" disabled></v-simple-checkbox>
+              <v-simple-checkbox
+                v-model="item.isAdmin"
+                disabled
+              ></v-simple-checkbox>
             </template>
             <template v-slot:item.edit="{ item }">
-              <v-btn dark small fab color="deep-orange darken-4" @click="userEditClick(item)">
+              <v-btn
+                dark
+                small
+                fab
+                color="deep-orange darken-4"
+                @click="userEditClick(item)"
+              >
                 <v-icon>mdi-dots-horizontal</v-icon>
               </v-btn>
             </template>
             <template v-if="user.isAdmin" v-slot:item.delete="{ item }">
-              <v-btn dark small fab color="deep-orange darken-4" @click="userDeleteClick(item)">
+              <v-btn
+                dark
+                small
+                fab
+                color="deep-orange darken-4"
+                @click="userDeleteClick(item)"
+              >
                 <v-icon>mdi-minus</v-icon>
               </v-btn>
             </template>
@@ -43,19 +60,20 @@
           color="deep-orange darken-4"
           text
           @click="$emit('close')"
-        >Close</v-btn>
+          >Close</v-btn
+        >
       </v-card-actions>
     </v-card>
     <UserDialog
       :administrator="user.isAdmin"
       :shown="userAddDialogShown"
-      @close="userAddDialogShown=false"
+      @close="userAddDialogShown = false"
       @save="init"
     ></UserDialog>
     <UserDialog
       edit="true"
       :shown="userEditDialogShown"
-      @close="userEditDialogShown=false"
+      @close="userEditDialogShown = false"
       :isAdmin="selectedUser.isAdmin"
       :name="selectedUser.name"
       @save="init"
@@ -65,7 +83,7 @@
       title="Delete User"
       :message="`Do you want to delete user ${selectedUser.name}?`"
       :shown="userDeleteDialogShown"
-      @no="userDeleteDialogShown=false"
+      @no="userDeleteDialogShown = false"
       @yes="deleteUser"
     ></YesNoDialog>
   </v-dialog>

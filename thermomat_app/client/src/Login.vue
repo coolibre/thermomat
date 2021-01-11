@@ -3,8 +3,12 @@
     <v-container class="deep-orange" fill-height fluid>
       <v-col cols="12">
         <v-row justify="center">
-          <v-card class="pa-5">
-            <v-text-field color="deep-orange darken-4" v-model="name" label="Name"></v-text-field>
+          <v-card class="pa-5 login-container">
+            <v-text-field
+              color="deep-orange darken-4"
+              v-model="name"
+              label="Name"
+            ></v-text-field>
             <v-text-field
               color="deep-orange darken-4"
               v-model="password"
@@ -12,12 +16,23 @@
               :type="'password'"
               @keyup.enter="login"
             ></v-text-field>
-            <v-row justify="center">
-              <div class="login-message">{{loginMessage}}</div>
-            </v-row>
-            <v-row justify="center">
-              <v-btn color="deep-orange darken-4" outlined justify="center" @click="login">Login</v-btn>
-            </v-row>
+            <v-container>
+              <v-row justify="center">
+                <div class="login-message">{{ loginMessage }}</div>
+              </v-row>
+            </v-container>
+            <v-container>
+              <v-row justify="center">
+                <v-btn
+                  class="login-button"
+                  color="deep-orange darken-4"
+                  outlined
+                  justify="center"
+                  @click="login"
+                  >Login</v-btn
+                >
+              </v-row>
+            </v-container>
           </v-card>
         </v-row>
       </v-col>
@@ -47,5 +62,7 @@ export default {
 .login-message {
   color: red;
 }
+.login-container {
+  min-width: 280px;
+}
 </style>
-
