@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="shown" persistent max-width="500px">
+  <v-dialog v-model="isShown" persistent max-width="500px">
     <v-form ref="form" v-model="valid">
       <v-card height="100%">
         <v-card-title>
@@ -13,14 +13,14 @@
               <v-text-field
                 v-if="!edit"
                 color="deep-orange darken-4"
-                v-model="name"
+                v-model="username"
                 label="Name"
               ></v-text-field>
               <v-text-field
                 v-if="edit"
                 disabled
                 color="deep-orange darken-4"
-                v-model="name"
+                v-model="username"
                 label="Name"
                 :rules="[required]"
               ></v-text-field>
@@ -43,7 +43,7 @@
                 :type="showPassword ? 'text' : 'password'"
                 name="password"
                 label="Password"
-                :rules="[required]"
+                :rules="passwordRule"
                 @click:append="showPassword = !showPassword"
               ></v-text-field>
             </v-col>
@@ -55,7 +55,7 @@
                 :type="showPassword ? 'text' : 'password'"
                 name="repeat"
                 label="Repeat Password"
-                :rules="[required, matches]"
+                :rules="passwordConfirmRule"
                 @click:append="showPassword = !showPassword"
               ></v-text-field>
             </v-col>
@@ -87,20 +87,26 @@
 </template>
 <script>
 export default {
-  props: ["name", "isAdmin", "shown", "edit", "administrator"],
-  data: () => ({
-    valid: false,
-    password: "",
-    passwordMatch: "",
-    showPassword: false,
-  }),
+  props: ["name", "admin", "shown", "edit", "administrator"],
+  data: function() {
+    return {
+      valid: false,
+      password: "",
+      passwordMatch: "",
+      showPassword: false,
+      isAdmin: false,
+      isAdminChanged: false,
+      username: "",
+      isShown: "",
+    };
+  },
   methods: {
     validateField() {
       this.$refs.form.validate();
     },
     save() {
       if (this.administrator) {
-        this.$api.addUser(this.name, this.password, this.isAdmin);
+        this.$api.addUser(this.username, this.password, this.isAdmin);
       } else {
         this.$api.updatePassword(this.password);
       }
@@ -120,9 +126,41 @@ export default {
       return !!value || "Required!";
     },
   },
+  computed: {
+    passwordRule: function() {
+      if (this.isAdminChanged || (this.edit && this.password === "")) {
+        return [];
+      }
+      return [this.required];
+    },
+    passwordConfirmRule: function() {
+      if (this.isAdminChanged || (this.edit && this.password === "")) {
+        return [];
+      }
+      return [this.required, this.matches];
+    },
+  },
   watch: {
     password: "validateField",
     passwordMatch: "validateField",
+    isAdmin: function() {
+      this.isAdminChanged = !this.isAdminChanged;
+      this.validateField();
+    },
+    admin: function(val) {
+      this.isAdmin = val;
+    },
+    name: function(val) {
+      this.username = val;
+    },
+    shown: function(val) {
+      if (!val) {
+        this.isAdminChanged = false;
+        this.password = "";
+        this.passwordMatch = "";
+      }
+      this.isShown = val;
+    },
   },
 };
 </script>

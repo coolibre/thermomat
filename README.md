@@ -43,3 +43,7 @@ https://www.amazon.de/AZDelivery-ESP8266-Wireless-serielles-Arduino/dp/B0737D3WL
 - Deep Sleep and Wake Up every 15 min to save energy
 - stays on for reconfiguring 3 mins while network unreachable, sleeps and reconnects if not configured in this period
 - provides reset pin for clearing wifi Settings and force configuring mode
+
+# TODO
+
+- Multiple Users are supported but parallel usage (updates in UI) is not implemented atm.

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="shown" persistent max-width="500px">
+  <v-dialog v-model="isShown" persistent max-width="500px">
     <v-card height="100%">
       <v-card-title>
         <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
@@ -21,13 +21,13 @@
             <v-icon>mdi-plus</v-icon>
           </v-btn>
           <v-data-table :headers="headers" :items="users" sort-by="name">
-            <template v-slot:item.isAdmin="{ item }">
+            <template v-slot:[`item.isAdmin`]="{ item }">
               <v-simple-checkbox
                 v-model="item.isAdmin"
                 disabled
               ></v-simple-checkbox>
             </template>
-            <template v-slot:item.edit="{ item }">
+            <template v-slot:[`item.edit`]="{ item }">
               <v-btn
                 dark
                 small
@@ -38,7 +38,7 @@
                 <v-icon>mdi-dots-horizontal</v-icon>
               </v-btn>
             </template>
-            <template v-if="user.isAdmin" v-slot:item.delete="{ item }">
+            <template v-if="user.isAdmin" v-slot:[`item.delete`]="{ item }">
               <v-btn
                 dark
                 small
@@ -74,7 +74,7 @@
       edit="true"
       :shown="userEditDialogShown"
       @close="userEditDialogShown = false"
-      :isAdmin="selectedUser.isAdmin"
+      :admin="selectedUser.isAdmin"
       :name="selectedUser.name"
       @save="init"
       :administrator="user.isAdmin"
@@ -145,6 +145,11 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  computed: {
+    isShown: function() {
+      return this.shown;
+    },
   },
 };
 </script>

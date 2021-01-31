@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="shown" persistent max-width="550px">
+  <v-dialog v-model="isShown" persistent max-width="550px">
     <v-card height="100%">
       <v-card-title>
         <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
@@ -75,6 +75,11 @@ export default {
     },
     close() {
       this.$emit("close");
+    },
+  },
+  computed: {
+    isShown: function() {
+      return this.shown;
     },
   },
 };
