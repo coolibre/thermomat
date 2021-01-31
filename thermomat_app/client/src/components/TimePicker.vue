@@ -6,8 +6,8 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </div>
-      <div class="hidden-xs-only display-4 text-center">{{formatHour}}</div>
-      <div class="hidden-sm-and-up display-1 text-center">{{formatHour}}</div>
+      <div class="hidden-xs-only display-4 text-center">{{ formatHour }}</div>
+      <div class="hidden-sm-and-up display-1 text-center">{{ formatHour }}</div>
       <div class="d-flex flex-row justify-center">
         <v-btn dark fab small color="deep-orange darken-4" @click="minusHour">
           <v-icon>mdi-minus</v-icon>
@@ -24,8 +24,10 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </div>
-      <div class="hidden-xs-only display-4 text-center">{{formatMinute}}</div>
-      <div class="hidden-sm-and-up display-1 text-center">{{formatMinute}}</div>
+      <div class="hidden-xs-only display-4 text-center">{{ formatMinute }}</div>
+      <div class="hidden-sm-and-up display-1 text-center">
+        {{ formatMinute }}
+      </div>
       <div class="d-flex flex-row justify-center">
         <v-btn dark fab small color="deep-orange darken-4" @click="minusMinute">
           <v-icon>mdi-minus</v-icon>
@@ -85,13 +87,13 @@ export default {
     },
   },
   watch: {
-    minute: function () {
+    minute: function() {
       this.setValue();
     },
-    hour: function () {
+    hour: function() {
       this.setValue();
     },
-    value: function (value) {
+    value: function(value) {
       this.$emit("input", value);
     },
   },

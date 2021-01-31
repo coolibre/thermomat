@@ -101,18 +101,19 @@ app.get("/logout", authMiddleware, function (req, res) {
   return res.send();
 });
 app.get("/stream", authMiddleware, sse.init);
-app.post("/user/add", [authMiddleware, authorizeAdmin], async function (
-  req,
-  res
-) {
-  try {
-    const hash = await hashPassword(req.body.password);
-    addRequest("addUser", [req.body.name, hash, req.body.isAdmin], res);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Error on saving user");
+app.post(
+  "/user/add",
+  [authMiddleware, authorizeAdmin],
+  async function (req, res) {
+    try {
+      const hash = await hashPassword(req.body.password);
+      addRequest("addUser", [req.body.name, hash, req.body.isAdmin], res);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Error on saving user");
+    }
   }
-});
+);
 app.get("/user/get", authMiddleware, function (req, res) {
   getRequest("getUser", [req.user.name, true], res);
 });
@@ -128,12 +129,13 @@ app.post("/user/password/update", [authMiddleware], async function (req, res) {
     res.status(500).send("Error on changing password");
   }
 });
-app.post("/user/delete", [authMiddleware, authorizeAdmin, isNotMe], function (
-  req,
-  res
-) {
-  addRequest("deleteUser", [req.body.name], res);
-});
+app.post(
+  "/user/delete",
+  [authMiddleware, authorizeAdmin, isNotMe],
+  function (req, res) {
+    addRequest("deleteUser", [req.body.name], res);
+  }
+);
 app.get(
   "/temperature/get",
   ipfilter(IPS, {

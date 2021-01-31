@@ -2,10 +2,15 @@
   <v-app id="inspire" class="no-user-select">
     <v-app-bar app color="deep-orange" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="hidden-xs-only display-1">Thermomat</v-toolbar-title>
+      <v-toolbar-title class="hidden-xs-only display-1"
+        >Thermomat</v-toolbar-title
+      >
       <v-toolbar-title
         :class="$vuetify.breakpoint.smAndUp ? 'display-1 pl-10' : 'body-1'"
-      >{{rooms[activeRoomIndex] ? rooms[activeRoomIndex].name : ''}}</v-toolbar-title>
+        >{{
+          rooms[activeRoomIndex] ? rooms[activeRoomIndex].name : ""
+        }}</v-toolbar-title
+      >
       <v-spacer></v-spacer>
       <v-menu bottom offset-y>
         <template v-slot:activator="{ on, attrs }">
@@ -27,7 +32,10 @@
     <v-navigation-drawer clipped v-model="drawer" app>
       <v-list>
         <v-subheader color="deep-orange">Rooms</v-subheader>
-        <v-list-item-group v-model="activeRoomIndex" active-class="deep-orange darken-4">
+        <v-list-item-group
+          v-model="activeRoomIndex"
+          active-class="deep-orange darken-4"
+        >
           <v-list-item
             v-for="(room, index) in rooms"
             :key="room.name"
@@ -38,13 +46,13 @@
               <v-icon>mdi-door</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{room.name}}</v-list-item-title>
+              <v-list-item-title>{{ room.name }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-content v-if="rooms.length > 0">
+    <v-main v-if="rooms.length > 0">
       <v-container class="fill-height" fluid>
         <v-col class="text-center">
           <DaySelector
@@ -57,26 +65,35 @@
             v-on:showCopyDialog="onShowCopyDialog"
           ></DaySelector>
           <v-spacer></v-spacer>
-          <v-btn dark fab bottom middle color="deep-orange darken-4" @click="addPlanDialog=true">
+          <v-btn
+            dark
+            fab
+            bottom
+            middle
+            color="deep-orange darken-4"
+            @click="addPlanDialog = true"
+          >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-col>
       </v-container>
-    </v-content>
+    </v-main>
     <v-snackbar
       v-if="rooms.length > 0"
       bottom
       :timeout="5000"
       color="deep-orange darken-4"
       v-model="snackbar"
-    >{{ snackText }}</v-snackbar>
+      >{{ snackText }}</v-snackbar
+    >
     <v-snackbar
       v-if="rooms.length === 0"
       bottom
-      :timeout="0"
+      :timeout="-1"
       color="deep-orange darken-4"
       v-model="snackbar"
-    >{{ snackText }}</v-snackbar>
+      >{{ snackText }}</v-snackbar
+    >
     <v-dialog v-model="addPlanDialog" persistent max-width="600px">
       <v-card>
         <v-card-title>
@@ -84,7 +101,7 @@
         </v-card-title>
         <v-card-text>
           <v-text-field
-            :rules="[v => !!v || 'Name is required']"
+            :rules="[(v) => !!v || 'Name is required']"
             v-model="planName"
             color="deep-orange darken-4"
             label="Plan name*"
@@ -99,20 +116,24 @@
             outlined
             color="deep-orange darken-4"
             @click="addPlanDialog = false"
-          >Close</v-btn>
+            >Close</v-btn
+          >
           <v-btn
             :small="$vuetify.breakpoint.xsOnly"
             outlined
             color="deep-orange darken-4"
             @click="addPlan"
-          >Save</v-btn>
+            >Save</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="showCopyDialog" persistent max-width="600px">
       <v-card>
         <v-card-title>
-          <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'">Copy temperatures to...</span>
+          <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
+            >Copy temperatures to...</span
+          >
         </v-card-title>
         <v-card-text>
           <v-select
@@ -124,7 +145,7 @@
             color="deep-orange darken-4"
             item-color="deep-orange darken-4"
             label="Select a room"
-            @change="fetchPlans(copySelectedRoom,'copyPlans')"
+            @change="fetchPlans(copySelectedRoom, 'copyPlans')"
           ></v-select>
           <v-select
             v-model="copySelectedPlan"
@@ -150,17 +171,22 @@
             color="deep-orange darken-4"
             outlined
             @click="showCopyDialog = false"
-          >Close</v-btn>
+            >Close</v-btn
+          >
           <v-btn
             :small="$vuetify.breakpoint.xsOnly"
             color="deep-orange darken-4"
             outlined
             @click="onCopy"
-          >Copy</v-btn>
+            >Copy</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <UserManagementDialog :shown="showUserManagementDialog" @close="showUserManagementDialog=false"></UserManagementDialog>
+    <UserManagementDialog
+      :shown="showUserManagementDialog"
+      @close="showUserManagementDialog = false"
+    ></UserManagementDialog>
   </v-app>
 </template>
 
@@ -168,7 +194,7 @@
 // eslint no-console off
 import DaySelector from "./components/DaySelector";
 import UserManagementDialog from "./components/UserManagementDialog";
-import sse from "./sse";
+import SSE from "./sse";
 import util from "./util";
 export default {
   props: {
@@ -193,6 +219,7 @@ export default {
     updateDaySelector: false,
     accountMenuItems: [{ title: "Users" }, { title: "Logout" }],
     user: {},
+    sse: new SSE(),
   }),
   components: {
     DaySelector,
@@ -209,6 +236,7 @@ export default {
       else this.plans = response.response;
     },
     async init() {
+      this.sse.listen("addedRoom", this.onAddedRoom.bind(this));
       await this.fetchRooms();
       const rooms = this.rooms;
       if (rooms.length === 0) {
@@ -283,7 +311,6 @@ export default {
     },
   },
   mounted() {
-    sse.listen("addedRoom", this.onAddedRoom.bind(this));
     this.init();
   },
 };

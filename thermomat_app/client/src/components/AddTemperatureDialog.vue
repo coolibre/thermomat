@@ -1,8 +1,10 @@
 <template>
-  <v-dialog v-model="shown" persistent max-width="550px">
+  <v-dialog v-model="isShown" persistent max-width="550px">
     <v-card height="100%">
       <v-card-title>
-        <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'">Add temperature</span>
+        <span :class="$vuetify.breakpoint.xsOnly ? 'title' : 'headline'"
+          >Add temperature</span
+        >
       </v-card-title>
       <v-container fluid>
         <v-col cols="12">
@@ -31,14 +33,16 @@
           color="deep-orange darken-4"
           text
           @click="close"
-        >Close</v-btn>
+          >Close</v-btn
+        >
         <v-btn
           :small="$vuetify.breakpoint.xsOnly"
           outlined
           color="deep-orange darken-4"
           text
           @click="save"
-        >Save</v-btn>
+          >Save</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -71,6 +75,11 @@ export default {
     },
     close() {
       this.$emit("close");
+    },
+  },
+  computed: {
+    isShown: function() {
+      return this.shown;
     },
   },
 };

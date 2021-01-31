@@ -1,8 +1,17 @@
 <template>
   <div>
-    <v-item-group v-if="$vuetify.breakpoint.xsOnly" v-model="window" mandatory tag="v-flex">
-      <v-item v-for="day in days" :key="day" v-slot:default="{ active, toggle }">
-        <v-btn color="deep-orange darken-4" :input-value="active" icon @click="toggle">
+    <v-item-group v-if="$vuetify.breakpoint.xsOnly" v-model="window" mandatory>
+      <v-item
+        v-for="day in days"
+        :key="day"
+        v-slot:default="{ active, toggle }"
+      >
+        <v-btn
+          color="deep-orange darken-4"
+          :input-value="active"
+          icon
+          @click="toggle"
+        >
           <v-icon>mdi-record</v-icon>
         </v-btn>
       </v-item>
@@ -13,11 +22,19 @@
         v-model="window"
         class="shrink mr-6"
         mandatory
-        tag="v-flex"
       >
-        <v-item v-for="day in days" :key="day" v-slot:default="{ active, toggle }">
+        <v-item
+          v-for="day in days"
+          :key="day"
+          v-slot:default="{ active, toggle }"
+        >
           <div>
-            <v-btn color="deep-orange darken-4" :input-value="active" icon @click="toggle">
+            <v-btn
+              color="deep-orange darken-4"
+              :input-value="active"
+              icon
+              @click="toggle"
+            >
               <v-icon>mdi-record</v-icon>
             </v-btn>
           </div>
@@ -25,7 +42,11 @@
       </v-item-group>
 
       <v-col>
-        <v-window class="elevation-1" v-model="window" :vertical="$vuetify.breakpoint.smAndUp">
+        <v-window
+          class="elevation-1"
+          v-model="window"
+          :vertical="$vuetify.breakpoint.smAndUp"
+        >
           <v-window-item v-for="day in days" :key="day">
             <div class="d-flex flex-column mb-6">
               <v-card flat min-height="45vh">
@@ -33,11 +54,21 @@
                   <v-container>
                     <v-row align="center">
                       <strong
-                        :class="$vuetify.breakpoint.xsOnly ? 'body-1 pl-5' : 'title pl-5'"
-                      >{{ plan.name }}</strong>
+                        :class="
+                          $vuetify.breakpoint.xsOnly
+                            ? 'body-1 pl-5'
+                            : 'title pl-5'
+                        "
+                        >{{ plan.name }}</strong
+                      >
                       <strong
-                        :class="$vuetify.breakpoint.xsOnly ? 'body-1 pl-5' : 'title pl-5'"
-                      >{{ day }}</strong>
+                        :class="
+                          $vuetify.breakpoint.xsOnly
+                            ? 'body-1 pl-5'
+                            : 'title pl-5'
+                        "
+                        >{{ day }}</strong
+                      >
                       <v-spacer></v-spacer>
                       <div>
                         <v-btn
@@ -46,8 +77,15 @@
                           outlined
                           justify="center"
                           :small="$vuetify.breakpoint.xsOnly"
-                          @click="$emit('showCopyDialog',{day, plan, temps: temperatures[day]})"
-                        >copy to...</v-btn>
+                          @click="
+                            $emit('showCopyDialog', {
+                              day,
+                              plan,
+                              temps: temperatures[day],
+                            })
+                          "
+                          >copy to...</v-btn
+                        >
                       </div>
                       <div v-if="$vuetify.breakpoint.smAndUp">
                         <v-switch
@@ -115,7 +153,7 @@
                     right
                     small
                     color="deep-orange darken-4"
-                    @click="addTempDialog=true"
+                    @click="addTempDialog = true"
                   >
                     <v-icon>mdi-plus</v-icon>
                   </v-btn>
@@ -126,7 +164,11 @@
         </v-window>
       </v-col>
     </v-row>
-    <AddTemperatureDialog :shown="addTempDialog" @save="onAddTemp" @close="addTempDialog=false" />
+    <AddTemperatureDialog
+      :shown="addTempDialog"
+      @save="onAddTemp"
+      @close="addTempDialog = false"
+    />
   </div>
 </template>
 <script>
@@ -152,10 +194,10 @@ export default {
   }),
   components: { Temperatures, AddTemperatureDialog },
   computed: {
-    days: function () {
+    days: function() {
       return util.days;
     },
-    today: function () {
+    today: function() {
       const dayName = new Date().toLocaleDateString("en-US", {
         weekday: "long",
       });
@@ -163,13 +205,13 @@ export default {
     },
   },
   watch: {
-    active: function (newVal, oldVal) {
+    active: function(newVal, oldVal) {
       this.activatePlan(oldVal);
     },
-    planActive: function (newVal) {
+    planActive: function(newVal) {
       this.active = newVal;
     },
-    update: function (newVal) {
+    update: function(newVal) {
       if (newVal) this.init();
     },
   },

@@ -1,5 +1,11 @@
 # How to develop
 
+## Requirements
+
+- nodejs https://github.com/nvm-sh/nvm
+- yarn https://classic.yarnpkg.com/en/docs/install/#debian-stable
+- vuetify https://vuetifyjs.com/en/getting-started/installation/
+
 ## Server
 
 ```bash
@@ -14,6 +20,8 @@ node app.js
 ```bash
 # change to client directory
 cd client
+# install
+yarn install
 # start client build and watch for filechanges
 npx vue-cli-service build --watch
 ```
