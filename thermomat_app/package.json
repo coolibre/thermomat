@@ -18,7 +18,7 @@
     "express-sse": "^0.5.3",
     "helmet": "^4.4.1",
     "jsoncrement": "^1.0.1",
-    "lowdb": "^1.0.0",
+    "lowdb": "^2.0.2",
     "node-json-db": "^1.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
