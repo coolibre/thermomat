@@ -5,7 +5,7 @@ name: CI
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
+  pull_request:
     branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -35,7 +35,7 @@ jobs:
         with:
           context: ./thermomat_app
           file: ./thermomat_app/Dockerfile
-          push: true
+          push: false
           tags: |
             docker.pkg.github.com/${{ github.repository }}/thermomat:${{ github.sha }}
             docker.pkg.github.com/${{ github.repository }}/thermomat:latest
