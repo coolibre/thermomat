@@ -5,6 +5,8 @@ import Main from "./Main.vue";
 import Login from "./Login.vue";
 import vuetify from "./plugins/vuetify";
 import API from "./api";
+import getEnv from "./env";
+
 Vue.use(VueRouter);
 Vue.use(vuetify);
 Vue.config.productionTip = false;
@@ -22,9 +24,9 @@ const router = new VueRouter({
 });
 Vue.prototype.$api = new API(
   {
-    proto: process.env.VUE_APP_PROTOCOL,
-    port: process.env.VUE_APP_PORT,
-    host: process.env.VUE_APP_HOST,
+    proto: getEnv("VUE_APP_PROTOCOL"),
+    port: getEnv("VUE_APP_PORT"),
+    host: getEnv("VUE_APP_HOST"),
   },
   router
 );

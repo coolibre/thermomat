@@ -18,4 +18,5 @@ COPY --from=build-stage /usr/src/app ./
 RUN rm -r ./client/*
 COPY --from=build-stage /usr/src/app/client/dist ./client/dist
 EXPOSE 5050
+ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
 CMD [ "node", "app.js"]

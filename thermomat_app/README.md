@@ -34,11 +34,13 @@ Use thermomat.postman_collection to play around. Or connect a real device and co
 
 ## Build
 
-Place your domain in .env.production
-
 ```bash
 docker build . -t thermomat
 ```
+
+## Run
+
+docker run -d -p 5050:5050 -e VUE_APP_HOST="yourexampledomain.net" thermomat:latest
 
 ## Example with compose
 
@@ -78,8 +80,9 @@ services:
       - 5050
     environment:
       - LOCAL_IPS=192.168.0.0/24,127.0.0.1
-      - VIRTUAL_HOST=<your host>
-      - LETSENCRYPT_HOST=<your host>
+      - VIRTUAL_HOST=yourexampledomain.net
+      - LETSENCRYPT_HOST=yourexampledomain.net
+      - VUE_APP_HST=yourexampledomain.net
     volumes:
       - /usr/thermomat:/usr/src/app/db
     networks:
