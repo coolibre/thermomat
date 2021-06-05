@@ -39,8 +39,9 @@ docker build . -t thermomat
 ```
 
 ## Run
-
+```bash
 docker run -d -p 5050:5050 -e VUE_APP_HOST="yourexampledomain.net" thermomat:latest
+```
 
 ## Example with compose
 
@@ -72,7 +73,7 @@ services:
       - proxy
 
   thermomat:
-    image: thermomat:latest
+    image: docker.pkg.github.com/coolibre/thermomat/thermomat:latest
     restart: always
     ports:
       - 5050:5050
