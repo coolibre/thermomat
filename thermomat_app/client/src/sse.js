@@ -1,4 +1,7 @@
-const url = `${process.env.VUE_APP_PROTOCOL}://${process.env.VUE_APP_HOST}:${process.env.VUE_APP_PORT}/stream`;
+import getEnv from "./env";
+const url = `${getEnv("VUE_APP_PROTOCOL")}://${getEnv("VUE_APP_HOST")}:${getEnv(
+  "VUE_APP_PORT"
+)}/stream`;
 export default class SSE {
   listen(eventName, callback) {
     if (!this.eventSource) {
