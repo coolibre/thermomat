@@ -39,8 +39,9 @@ docker build . -t thermomat
 ```
 
 ## Run
-
+```bash
 docker run -d -p 5050:5050 -e VUE_APP_HOST="yourexampledomain.net" thermomat:latest
+```
 
 ## Example with compose
 
@@ -72,7 +73,7 @@ services:
       - proxy
 
   thermomat:
-    image: thermomat:latest
+    image: docker.pkg.github.com/coolibre/thermomat/thermomat:latest
     restart: always
     ports:
       - 5050:5050
@@ -82,7 +83,7 @@ services:
       - LOCAL_IPS=192.168.0.0/24,127.0.0.1
       - VIRTUAL_HOST=yourexampledomain.net
       - LETSENCRYPT_HOST=yourexampledomain.net
-      - VUE_APP_HST=yourexampledomain.net
+      - VUE_APP_HOST=yourexampledomain.net
     volumes:
       - /usr/thermomat:/usr/src/app/db
     networks:
