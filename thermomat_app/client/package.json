@@ -14,7 +14,7 @@
     "vue": "^2.6.12",
     "vue-cli-plugin-build-watch": "^1.0.0",
     "vue-cookies": "^1.7.4",
-    "vue-router": "^3.5.1",
+    "vue-router": "^3.5.4",
     "vuetify": "^2.4.3"
   },
   "devDependencies": {
