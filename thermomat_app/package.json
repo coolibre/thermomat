@@ -20,7 +20,7 @@
     "jsoncrement": "^1.0.1",
     "lowdb": "^1.0.0",
     "node-json-db": "^1.1.0",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "random-key": "0.3.2"
   }
