@@ -15,7 +15,7 @@
     "vue-cli-plugin-build-watch": "^1.0.0",
     "vue-cookies": "^1.7.4",
     "vue-router": "^3.5.1",
-    "vuetify": "^2.4.3"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
